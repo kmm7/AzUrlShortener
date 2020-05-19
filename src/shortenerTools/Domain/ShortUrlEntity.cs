@@ -13,7 +13,6 @@ namespace Cloud5mins.domain
         public string ShortUrl { get; set; }
 
         public int Clicks { get; set; }
-
         public bool IsDeleted { get; set; }
 
         public ShortUrlEntity(){}
