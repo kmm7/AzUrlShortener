@@ -14,6 +14,8 @@ namespace Cloud5mins.domain
 
         public int Clicks { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public ShortUrlEntity(){}
 
         public ShortUrlEntity(string longUrl, string endUrl){
@@ -30,6 +32,7 @@ namespace Cloud5mins.domain
             Url = longUrl;
             Title = title;
             Clicks = 0;
+            IsDeleted = false;
         }
 
         public static ShortUrlEntity GetEntity(string longUrl, string endUrl){
