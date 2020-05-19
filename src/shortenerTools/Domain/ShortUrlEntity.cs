@@ -13,19 +13,20 @@ namespace Cloud5mins.domain
         public string ShortUrl { get; set; }
 
         public int Clicks { get; set; }
+
         public bool IsDeleted { get; set; }
 
         public ShortUrlEntity(){}
 
         public ShortUrlEntity(string longUrl, string endUrl){
-            initialize(longUrl, endUrl, string.Empty);
+            Initialize(longUrl, endUrl, string.Empty);
         }
 
         public ShortUrlEntity(string longUrl, string endUrl, string title){
-            initialize(longUrl, endUrl, title);
+            Initialize(longUrl, endUrl, title);
         }
 
-        private void initialize(string longUrl, string endUrl, string title){
+        private void Initialize(string longUrl, string endUrl, string title){
             PartitionKey = endUrl.First().ToString();
             RowKey = endUrl;
             Url = longUrl;
