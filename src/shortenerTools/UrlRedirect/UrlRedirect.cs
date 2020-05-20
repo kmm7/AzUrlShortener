@@ -35,7 +35,7 @@ namespace Cloud5mins.Function
 
                 StorageTableHelper stgHelper = new StorageTableHelper(config["UlsDataStorage"]); 
 
-                var tempUrl = new ShortUrlEntity(string.Empty, shortUrl);
+                var tempUrl = new ShortUrlEntity();
                 
                 var newUrl = await stgHelper.GetShortUrlEntity(tempUrl);
 
