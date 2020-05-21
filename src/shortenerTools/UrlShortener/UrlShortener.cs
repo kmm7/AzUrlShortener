@@ -68,14 +68,12 @@ namespace Cloud5mins.Function
                 string longUrl = input.Url.Trim();
                 string vanity = input.Vanity.Trim();
                 string title = input.Title.Trim();
-                bool isdeleted = input.IsDeleted;
-
 
                 ShortUrlEntity newRow;
 
                 if(!string.IsNullOrEmpty(vanity))
                 {
-                    newRow = new ShortUrlEntity(longUrl, vanity, title, isdeleted);
+                    newRow = new ShortUrlEntity(longUrl, vanity, title);
                     if(await stgHelper.IfShortUrlEntityExist(newRow))
                     {
                         return req.CreateResponse(HttpStatusCode.Conflict, "This Short URL already exist.");
@@ -83,14 +81,14 @@ namespace Cloud5mins.Function
                 }
                 else
                 {
-                    newRow = new ShortUrlEntity(longUrl, await Utility.GetValidEndUrl(vanity, stgHelper), title, isdeleted);
+                    newRow = new ShortUrlEntity(longUrl, await Utility.GetValidEndUrl(vanity, stgHelper), title);
                 }
 
                 await stgHelper.SaveShortUrlEntity(newRow);
 
                 var host = req.RequestUri.GetLeftPart(UriPartial.Authority);
                 log.LogInformation($"-> host = {host}");
-                result = new ShortResponse(host, newRow.Url, newRow.RowKey, newRow.Title, newRow.IsDeleted);
+                result = new ShortResponse(host, newRow.Url, newRow.RowKey, newRow.Title);
 
                 log.LogInformation("Short Url created.");
              }

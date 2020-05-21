@@ -96,11 +96,8 @@ namespace Cloud5mins.domain
          {
             ShortUrlEntity originalUrl = await GetShortUrlEntity(urlEntity);
             originalUrl.Url = urlEntity.Url;
-            originalUrl.Title = urlEntity.Title;
-            // this should set the IsDeleted property to whatever the user has passed in
-            // if nothing is provided it will be NULL, else it wil be TRUE and therefore
-            // we will correctly update the IsDeleted flag to either TRUE or NULL
-            originalUrl.IsDeleted = urlEntity.IsDeleted;
+            originalUrl.Title = urlEntity.Title;            
+            originalUrl.IsArchived = urlEntity.IsArchived;
 
             return await SaveShortUrlEntity(originalUrl);
          }
