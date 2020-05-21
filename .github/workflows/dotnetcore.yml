@@ -5,7 +5,7 @@ on:
     branches: [ feature/** ]
 
 jobs:
-  build shortenerTools:
+  build-shortenerTools:
 
     runs-on: ubuntu-latest
     
