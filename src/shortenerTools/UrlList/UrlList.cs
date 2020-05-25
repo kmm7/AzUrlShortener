@@ -24,6 +24,7 @@ using System.Net;
 using System.Net.Http;
 using Cloud5mins.domain;
 using Microsoft.Extensions.Configuration;
+using System.Linq;
 
 namespace Cloud5mins.Function
 {
@@ -49,6 +50,7 @@ namespace Cloud5mins.Function
             try
             {
                result.UrlList = await stgHelper.GetAllShortUrlEntities();
+                result.UrlList = result.UrlList.Where(p => !(p.IsArchived ?? false)).ToList();
                var host = req.RequestUri.GetLeftPart(UriPartial.Authority); 
                foreach(ShortUrlEntity url in result.UrlList){
                    url.ShortUrl = Utility.GetShortUrl(host, url.RowKey);

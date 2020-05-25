@@ -14,7 +14,7 @@ namespace Cloud5mins.domain
 
         public int Clicks { get; set; }
 
-        public bool IsArchived { get; set; }
+        public bool? IsArchived { get; set; }
 
         public ShortUrlEntity(){}
 
