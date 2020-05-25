@@ -112,12 +112,12 @@ namespace adminBlazorWebsite.Data
 
         public async Task<ShortUrlEntity> ArchiveShortUrl(ShortUrlEntity archivedUrl) 
         {
-            var url = GetFunctionUrl("UrlDelete");
+            var url = GetFunctionUrl("UrlArchive");
 
             CancellationToken cancellationToken;
 
             using (var client = new HttpClient())
-            using (var request = new HttpRequestMessage(HttpMethod.Post, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Delete, url))
             using (var httpContent = CreateHttpContent(archivedUrl))
             {
                 request.Content = httpContent;
