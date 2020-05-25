@@ -25,9 +25,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace Cloud5mins.Function
 {
-    public static class UrlDelete
+    public static class UrlArchive
     {
-        [FunctionName("UrlDelete")]
+        [FunctionName("UrlArchive")]
         public static async Task<HttpResponseMessage> Run(
         [HttpTrigger(AuthorizationLevel.Function, "delete", Route = null)]HttpRequestMessage req,
         ILogger log,
