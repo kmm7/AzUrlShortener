@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using adminBlazorWebsite.Pages;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
@@ -20,7 +21,7 @@ namespace adminBlazorWebsite.Data
         {
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables()
                 .Build();
             return config;
@@ -103,6 +104,28 @@ namespace adminBlazorWebsite.Data
                     .ConfigureAwait(false))
                 {
 
+                    var resultList = response.Content.ReadAsStringAsync().Result;
+                    return JsonConvert.DeserializeObject<ShortUrlEntity>(resultList);
+                }
+            }
+        }
+
+        public async Task<ShortUrlEntity> ArchiveShortUrl(ShortUrlEntity archivedUrl) 
+        {
+            var url = GetFunctionUrl("UrlDelete");
+
+            CancellationToken cancellationToken;
+
+            using (var client = new HttpClient())
+            using (var request = new HttpRequestMessage(HttpMethod.Post, url))
+            using (var httpContent = CreateHttpContent(archivedUrl))
+            {
+                request.Content = httpContent;
+
+                using (var response = await client
+                    .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+                    .ConfigureAwait(false))
+                {
                     var resultList = response.Content.ReadAsStringAsync().Result;
                     return JsonConvert.DeserializeObject<ShortUrlEntity>(resultList);
                 }

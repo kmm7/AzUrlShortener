@@ -22,7 +22,7 @@ else
                 <th>Vanity</th>
                 <th>Title</th>
                 <th>Url</th>
-                <th>Clicks</th>
+                <th>Clicks</th>                
                 <th></th>
             </tr>
         </thead>
@@ -38,8 +38,9 @@ else
                     <td>
                         <span title="@url.Url">@url.GetDisplayableUrl()</span>
                     </td>
-                    <td>@url.Clicks</td>
+                    <td>@url.Clicks</td>                    
                     <td><button type="button" class="btn btn-outline-primary btn-sm" @onclick="@(() => EditShortUrl(url))">Edit</button></td>
+                    <td><button type="button" class="btn btn-outline-primary btn-sm" @onclick="@(() => ArchiveShortUrl(url))">Archive</button></td>
                 </tr>
             }
         </tbody>
@@ -109,13 +110,17 @@ else
                 <div class="modal-body">
                     <label>Title</label>
                     <input class="form-control" type="text"
-                                       placeholder="Title or description for this URL"
-                                       @bind="editedUrl.Title" />
+                           placeholder="Title or description for this URL"
+                           @bind="editedUrl.Title" />
                     <br />
                     <label>The Url to redirect</label>
                     <input class="form-control" type="text"
-                                       placeholder="https://..."
-                                       @bind="editedUrl.Url" />
+                           placeholder="https://..."
+                           @bind="editedUrl.Url" />
+                    <br />
+                    <label>Hide URL</label>
+                    <input class="form-control" type="checkbox"
+                           @bind="editedUrl.IsArchived" />
                     <br />
                     <button class="btn btn-primary"
                             @onclick="SaveUpdatedShortUrl">
@@ -148,7 +153,7 @@ else
         await UrlService.CreateShortUrl(shortUrlRequest);
         UrlList = await UrlService.GetUrlList();
     }
-    
+
     private async Task SaveUpdatedShortUrl()
     {
         ShowEditPopup = false;
@@ -173,6 +178,14 @@ else
     {
         editedUrl = urlEntity;
         ShowEditPopup = true;
+    }
+
+    [Authorize(Roles = "admin")]
+    public async Task ArchiveShortUrl(ShortUrlEntity urlEntity)
+    {
+        urlEntity.IsArchived = true;
+        await UrlService.ArchiveShortUrl(urlEntity);
+        UrlList = await UrlService.GetUrlList();
     }
 
 
