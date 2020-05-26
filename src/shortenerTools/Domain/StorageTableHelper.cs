@@ -97,7 +97,6 @@ namespace Cloud5mins.domain
             ShortUrlEntity originalUrl = await GetShortUrlEntity(urlEntity);
             originalUrl.Url = urlEntity.Url;
             originalUrl.Title = urlEntity.Title;            
-            originalUrl.IsArchived = urlEntity.IsArchived;
 
             return await SaveShortUrlEntity(originalUrl);
          }

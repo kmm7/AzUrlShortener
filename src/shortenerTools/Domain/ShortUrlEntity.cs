@@ -18,6 +18,11 @@ namespace Cloud5mins.domain
 
         public ShortUrlEntity(){}
 
+        public ShortUrlEntity(string longUrl, string endUrl)
+        {
+            Initialize(longUrl, endUrl, string.Empty);
+        }
+
         public ShortUrlEntity(string longUrl, string endUrl, string title)
         {
             Initialize(longUrl, endUrl, title);
