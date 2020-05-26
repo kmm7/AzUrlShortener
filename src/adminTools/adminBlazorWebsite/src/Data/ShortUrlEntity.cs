@@ -16,8 +16,6 @@ namespace  adminBlazorWebsite.Data
 
         public int Clicks { get; set; }
 
-        public bool IsArchived { get; set; }
-
         public ShortUrlEntity(){}
 
         public static ShortUrlEntity GetEntity(string longUrl, string endUrl)

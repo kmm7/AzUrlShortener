@@ -118,10 +118,6 @@ else
                            placeholder="https://..."
                            @bind="editedUrl.Url" />
                     <br />
-                    <label>Hide URL</label>
-                    <input class="form-control" type="checkbox"
-                           @bind="editedUrl.IsArchived" />
-                    <br />
                     <button class="btn btn-primary"
                             @onclick="SaveUpdatedShortUrl">
                         Save
@@ -183,7 +179,6 @@ else
     [Authorize(Roles = "admin")]
     public async Task ArchiveShortUrl(ShortUrlEntity urlEntity)
     {
-        urlEntity.IsArchived = true;
         await UrlService.ArchiveShortUrl(urlEntity);
         UrlList = await UrlService.GetUrlList();
     }
