@@ -44,8 +44,7 @@ namespace adminBlazorWebsite.Data
         public async Task<ShortUrlList> GetUrlList()
         {
             var url = GetFunctionUrl("UrlList");
-
-            CancellationToken cancellationToken;
+            CancellationToken cancellationToken;            
 
             using (var client = new HttpClient())
             using (var request = new HttpRequestMessage(HttpMethod.Get, url))
@@ -54,12 +53,11 @@ namespace adminBlazorWebsite.Data
                     .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
                     .ConfigureAwait(false))
                 {
-                    var resultList = response.Content.ReadAsStringAsync().Result;
-                    return JsonConvert.DeserializeObject<ShortUrlList>(resultList);
+                    var resultList = response.Content.ReadAsStringAsync().Result;                    
+                    return JsonConvert.DeserializeObject<ShortUrlList>(resultList);                    
                 }
             }
         }
-
 
 
         public async Task<ShortUrlList> CreateShortUrl(ShortUrlRequest shortUrlRequest)

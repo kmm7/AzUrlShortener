@@ -14,14 +14,15 @@
     <base href="~/" />
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link href="css/site.css" rel="stylesheet" />
+    <link href="_content/BlazorPro.Spinkit/spinkit.min.css" rel="stylesheet" />
 
     <script>
         window.clipboardCopy = {
-            copyText: function(text) {
+            copyText: function (text) {
                 navigator.clipboard.writeText(text)
-                .catch(function (error) {
-                    alert(error);
-                });
+                    .catch(function (error) {
+                        alert(error);
+                    });
             }
         };
     </script>
