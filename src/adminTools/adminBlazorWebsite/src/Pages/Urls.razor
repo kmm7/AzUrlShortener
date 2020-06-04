@@ -156,7 +156,6 @@
     }
     protected override async Task OnParametersSetAsync()
     {
-        await Task.Delay(8000);
         UrlList = await UrlService.GetUrlList();
     }
 
