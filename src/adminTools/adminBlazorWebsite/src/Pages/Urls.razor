@@ -156,7 +156,6 @@
     }
     protected override async Task OnParametersSetAsync()
     {
-        //ToDo remember to remove this before pushing
         await Task.Delay(8000);
         UrlList = await UrlService.GetUrlList();
     }
@@ -178,7 +177,6 @@
     [Authorize(Roles = "admin")]
     public async Task ArchiveShortUrl(ShortUrlEntity urlEntity)
     {
-        System.Diagnostics.Debug.WriteLine(buttonRef);
         await UrlService.ArchiveShortUrl(urlEntity);
         UrlList = await UrlService.GetUrlList();
     }
